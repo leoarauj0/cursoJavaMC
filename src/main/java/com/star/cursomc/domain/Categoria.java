@@ -1,13 +1,17 @@
 package com.star.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
-@Table(name = "tbl_categoria")
+@Table(name = "categoria")
 public class Categoria implements Serializable {
     public static final long serialVersionUID = 1L;
 
@@ -18,6 +22,11 @@ public class Categoria implements Serializable {
 
     @Column(name = "nome_categoria")
     private String nome;
+
+
+    @JsonManagedReference
+    @ManyToMany(mappedBy = "categorias")
+    private List<Produto> produtos = new ArrayList<>();
 
     public Categoria() {
     }
@@ -42,6 +51,14 @@ public class Categoria implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override
