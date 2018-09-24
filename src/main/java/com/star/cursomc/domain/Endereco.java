@@ -1,5 +1,6 @@
 package com.star.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.star.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Endereco implements Serializable {
     @Column(name = "endereco_cep")
     private String cep;
 
+    @JsonBackReference //indica que endereço nao pode serializar cliente
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;

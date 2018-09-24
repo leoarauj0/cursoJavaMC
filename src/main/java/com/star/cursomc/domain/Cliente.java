@@ -1,5 +1,6 @@
 package com.star.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.star.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Cliente implements Serializable {
     @Column(name = "cliente_tipo")
     private Integer tipo; //nao utilizamos o Tipo cliente para que fique salvo um int, no construtor fazemos a referencia desse int com o getCod
 
+    @JsonManagedReference //indica que cliente pode serializar endereço para nao haver erros
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
