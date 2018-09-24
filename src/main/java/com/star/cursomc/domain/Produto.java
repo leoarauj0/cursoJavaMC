@@ -14,22 +14,22 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Produto implements Serializable {
     public static final long serialVersionUID = 1L;
 
-    @Column(name = "id_produto")
+    @Column(name = "produto_id")
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
 
-    @Column(name = "nome_produto")
+    @Column(name = "produto_nome")
     private String nome;
 
-    @Column(name = "preco_produto")
+    @Column(name = "produto_preco")
     private Double preço;
 
     @JsonBackReference
     @ManyToMany
     @JoinTable(name = "produto_categoria",
-        joinColumns = @JoinColumn(name = "id_produto"),
-        inverseJoinColumns = @JoinColumn(name = "id_categoria")
+        joinColumns = @JoinColumn(name = "produto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id")
     )
     private List<Categoria> categorias = new ArrayList<>();
 
