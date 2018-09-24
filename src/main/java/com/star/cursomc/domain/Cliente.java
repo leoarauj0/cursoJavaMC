@@ -5,10 +5,7 @@ import com.star.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -45,6 +42,8 @@ public class Cliente implements Serializable {
     @ElementCollection //para o jpa mapear a lista de telefones no banco como entidade fraca usamos a anotação @ElementCollection
     @CollectionTable(name="telefone")
     private Set<String> telefones = new HashSet<>();
+
+    private List<Pedido> pedidos = new ArrayList<>();
 
 
     public Cliente() {
@@ -114,5 +113,26 @@ public class Cliente implements Serializable {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id, cliente.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
