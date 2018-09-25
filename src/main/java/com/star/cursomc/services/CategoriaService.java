@@ -24,4 +24,9 @@ public class CategoriaService {
         obj.setId(null); //para o metodo save identificar que é um novo objeto e nao uma atualização de um ja existente
         return repo.save(obj);
     }
+
+    public Categoria update(Categoria obj) {
+        find(obj.getId());
+        return repo.save(obj);
+    }
 }

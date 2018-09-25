@@ -27,7 +27,7 @@ public class CategoriaResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<?> insert(@RequestBody Categoria obj){
+    public ResponseEntity<Categoria> insert(@RequestBody Categoria obj){
         obj = service.insert(obj);
 
         //para retornar o uri do novo objeto salvo
@@ -35,5 +35,11 @@ public class CategoriaResource {
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+        obj.setId(id);
+        obj = service.update(obj);
+        return ResponseEntity.noContent().build();
     }
 }
