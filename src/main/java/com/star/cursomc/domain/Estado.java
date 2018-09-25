@@ -1,14 +1,12 @@
 package com.star.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Estado implements Serializable {
@@ -23,7 +21,7 @@ public class Estado implements Serializable {
     private String nome;
 
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "estado") // mapeamento reverso para estado nao precisa do joincolumn
     private List<Cidade> cidades = new ArrayList<>();
 

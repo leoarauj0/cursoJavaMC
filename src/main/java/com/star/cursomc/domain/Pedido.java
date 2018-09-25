@@ -24,11 +24,10 @@ public class Pedido implements Serializable {
     @Column(name = "pedido_instante")
     private Date instante;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
     private Pagamento pagamento;
 
-    @JsonManagedReference
+
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

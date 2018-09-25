@@ -1,14 +1,11 @@
 package com.star.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.star.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Entity
@@ -33,7 +30,6 @@ public class Cliente implements Serializable {
     @Column(name = "cliente_tipo")
     private Integer tipo; //nao utilizamos o Tipo cliente para que fique salvo um int, no construtor fazemos a referencia desse int com o getCod
 
-    @JsonManagedReference //indica que cliente pode serializar endereço para nao haver erros
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -44,7 +40,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name="telefone")
     private Set<String> telefones = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 

@@ -1,12 +1,8 @@
 package com.star.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Cidade implements Serializable {
@@ -20,7 +16,6 @@ public class Cidade implements Serializable {
     @Column(name = "cidade_nome")
     private String nome;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name="estado_id")
     private Estado estado;
