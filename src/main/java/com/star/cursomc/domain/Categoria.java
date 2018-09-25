@@ -17,7 +17,7 @@ public class Categoria implements Serializable {
 
     @Column(name = "categoria_id")
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "categoria_nome")

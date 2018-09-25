@@ -2,15 +2,22 @@ package com.star.cursomc.domain;
 
 import com.star.cursomc.domain.enums.EstadoPagamento;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Pagamento implements Serializable {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED) //mapeamento de herança
+public abstract class Pagamento implements Serializable { //abstract para que nao dê para instanciar essa classe e sim suas filhas
     public static final long serialVersionUID = 1L;
 
+    @Id //como o id sera o mesmo de pedido nao colocamos pra gera-lo automaticamente aqui
     private Integer id;
-    private EstadoPagamento estadoPagamento;
+    private Integer estadoPagamento;
 
+    @OneToOne
+    @JoinColumn(name="pedido_id")
+    @MapsId //para indicar que o id de pagamento sera o mesmo de pedido
     private  Pedido pedido;
 
     public Pagamento() {
@@ -18,7 +25,7 @@ public class Pagamento implements Serializable {
 
     public Pagamento(Integer id, EstadoPagamento estadoPagamento, Pedido pedido) {
         this.id = id;
-        this.estadoPagamento = estadoPagamento;
+        this.estadoPagamento = estadoPagamento.getCod();
         this.pedido = pedido;
     }
 
@@ -31,11 +38,11 @@ public class Pagamento implements Serializable {
     }
 
     public EstadoPagamento getEstadoPagamento() {
-        return estadoPagamento;
+        return EstadoPagamento.toEnum(estadoPagamento);
     }
 
     public void setEstadoPagamento(EstadoPagamento estadoPagamento) {
-        this.estadoPagamento = estadoPagamento;
+        this.estadoPagamento = estadoPagamento.getCod();
     }
 
     public Pedido getPedido() {

@@ -14,7 +14,7 @@ public class Cidade implements Serializable {
 
     @Column(name = "cidade_id")
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "cidade_nome")

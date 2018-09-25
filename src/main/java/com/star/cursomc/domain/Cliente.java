@@ -17,7 +17,7 @@ public class Cliente implements Serializable {
 
     @Column(name = "cliente_id")
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "cliente_nome")
@@ -43,6 +43,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name="telefone")
     private Set<String> telefones = new HashSet<>();
 
+    @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
 
 
