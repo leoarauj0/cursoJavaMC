@@ -1,5 +1,6 @@
 package com.star.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.star.cursomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public abstract class Pagamento implements Serializable { //abstract para que na
     private Integer id;
     private Integer estadoPagamento;
 
+    @JsonBackReference
     @OneToOne
     @JoinColumn(name="pedido_id")
     @MapsId //para indicar que o id de pagamento sera o mesmo de pedido

@@ -1,5 +1,7 @@
 package com.star.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class ItemPedido implements Serializable {
     public static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @EmbeddedId //id imbultido em uma classe auxiliar
     private ItemPedidoPK id = new ItemPedidoPK();
     public ItemPedido() {
@@ -62,6 +65,7 @@ public class ItemPedido implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public Pedido getPedido() {
         return id.getPedido();
     }
